@@ -1,0 +1,235 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1060" viewBox="0 0 1200 1060" font-family="Arial, Helvetica, sans-serif">
+  <rect width="1200" height="1060" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="600" y="34" font-size="22" font-weight="bold" fill="#232F3E" text-anchor="middle">AWS EventBridge — Serverless Event Bus Architecture</text>
+  <text x="600" y="58" font-size="13" fill="#666666" text-anchor="middle">User &#8594; Route 53 &#8594; CloudFront / WAF &#8594; Load Balancer &#8594; App Tier &#8594; RDS — every layer emits events to the bus</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#232F3E"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#8C4FFF"/>
+    </marker>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <polygon points="0 0, 8 4, 0 8" fill="#FF9900"/>
+    </marker>
+  </defs>
+
+  <!-- User -->
+  <g>
+    <rect x="40" y="90" width="90" height="70" rx="6" fill="#F2F3F3" stroke="#232F3E" stroke-width="1.5"/>
+    <circle cx="85" cy="116" r="12" fill="#FF9900"/>
+    <path d="M70 152 q15 -18 30 0" stroke="#FF9900" stroke-width="5" fill="none"/>
+    <text x="85" y="178" font-size="12" font-weight="bold" fill="#232F3E" text-anchor="middle">User</text>
+  </g>
+
+  <!-- AWS Cloud outer box -->
+  <rect x="170" y="80" width="1000" height="940" fill="none" stroke="#232F3E" stroke-width="2"/>
+  <text x="190" y="106" font-size="16" font-weight="bold" fill="#232F3E">AWS Cloud</text>
+
+  <!-- Route 53 -->
+  <g>
+    <rect x="210" y="130" width="90" height="64" rx="4" fill="#8C4FFF"/>
+    <text x="255" y="156" font-size="26" fill="#ffffff" text-anchor="middle">53</text>
+    <text x="255" y="176" font-size="10" fill="#ffffff" text-anchor="middle">Route 53</text>
+    <text x="255" y="212" font-size="11" fill="#232F3E" text-anchor="middle">Amazon Route 53</text>
+    <text x="255" y="227" font-size="11" font-style="italic" fill="#555" text-anchor="middle">DNS service</text>
+  </g>
+
+  <!-- CloudFront -->
+  <g>
+    <rect x="360" y="130" width="90" height="64" rx="4" fill="#8C4FFF"/>
+    <circle cx="405" cy="162" r="16" fill="none" stroke="#ffffff" stroke-width="3"/>
+    <circle cx="405" cy="162" r="6" fill="#ffffff"/>
+    <text x="405" y="212" font-size="11" fill="#232F3E" text-anchor="middle">Amazon CloudFront</text>
+    <text x="405" y="227" font-size="11" font-style="italic" fill="#555" text-anchor="middle">CDN</text>
+  </g>
+
+  <!-- WAF -->
+  <g>
+    <rect x="510" y="130" width="90" height="64" rx="4" fill="#D13239"/>
+    <text x="555" y="168" font-size="22" fill="#ffffff" text-anchor="middle">&#128737;</text>
+    <text x="555" y="212" font-size="11" fill="#232F3E" text-anchor="middle">AWS WAF</text>
+    <text x="555" y="227" font-size="11" font-style="italic" fill="#555" text-anchor="middle">Web Application Firewall</text>
+  </g>
+
+  <!-- Scheduler box (right top) -->
+  <g>
+    <rect x="660" y="120" width="180" height="110" rx="6" fill="#F3EEFF" stroke="#8C4FFF" stroke-width="2"/>
+    <rect x="678" y="136" width="52" height="52" rx="4" fill="#8C4FFF"/>
+    <text x="704" y="168" font-size="22" fill="#ffffff" text-anchor="middle">&#9200;</text>
+    <text x="742" y="156" font-size="13" font-weight="bold" fill="#232F3E">EventBridge</text>
+    <text x="742" y="174" font-size="13" font-weight="bold" fill="#232F3E">Scheduler</text>
+    <text x="742" y="192" font-size="11" fill="#555">cron &#8226; one-off &#8226; retries</text>
+    <text x="750" y="216" font-size="11" font-style="italic" fill="#8C4FFF" text-anchor="middle">nightly jobs, no servers</text>
+  </g>
+
+  <!-- SaaS partner box (right top) -->
+  <g>
+    <rect x="870" y="120" width="260" height="110" rx="6" fill="#FFF4E5" stroke="#FF9900" stroke-width="2"/>
+    <rect x="888" y="136" width="52" height="52" rx="4" fill="#FF9900"/>
+    <text x="914" y="168" font-size="22" fill="#ffffff" text-anchor="middle">&#127760;</text>
+    <text x="952" y="156" font-size="13" font-weight="bold" fill="#232F3E">SaaS Partner Sources</text>
+    <text x="952" y="174" font-size="11" fill="#555">Stripe &#8226; Shopify &#8226; Datadog</text>
+    <text x="952" y="192" font-size="11" fill="#555">webhooks land on the bus</text>
+    <text x="1000" y="216" font-size="11" font-style="italic" fill="#B25E00" text-anchor="middle">partner event bus</text>
+  </g>
+
+  <!-- Arrows top row -->
+  <g stroke="#232F3E" stroke-width="1.8" fill="none">
+    <line x1="130" y1="125" x2="210" y2="150" marker-end="url(#arrow)"/>
+    <line x1="300" y1="162" x2="360" y2="162" marker-end="url(#arrow)"/>
+    <line x1="450" y1="162" x2="510" y2="162" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- VPC -->
+  <rect x="190" y="260" width="960" height="480" fill="none" stroke="#1B7A2E" stroke-width="2"/>
+  <text x="210" y="286" font-size="15" font-weight="bold" fill="#1B7A2E">VPC  (10.0.0.0/16)</text>
+
+  <!-- AZ 1 -->
+  <rect x="210" y="300" width="440" height="420" fill="#F7FBFF" stroke="#527FFF" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="430" y="324" font-size="13" font-weight="bold" fill="#527FFF" text-anchor="middle">Availability Zone 1</text>
+
+  <!-- AZ 2 -->
+  <rect x="690" y="300" width="440" height="420" fill="#F7FBFF" stroke="#527FFF" stroke-width="1.5" stroke-dasharray="7 5"/>
+  <text x="910" y="324" font-size="13" font-weight="bold" fill="#527FFF" text-anchor="middle">Availability Zone 2</text>
+
+  <!-- ALB spanning AZs -->
+  <g>
+    <rect x="520" y="350" width="160" height="52" rx="4" fill="#8C4FFF"/>
+    <text x="600" y="372" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Elastic Load Balancing</text>
+    <text x="600" y="390" font-size="11" fill="#ffffff" text-anchor="middle">Application Load Balancer</text>
+  </g>
+
+  <!-- Public subnet AZ1 -->
+  <g>
+    <rect x="230" y="430" width="400" height="46" fill="#E6F4EA" stroke="#1B7A2E" stroke-width="1"/>
+    <text x="240" y="459" font-size="12" font-weight="bold" fill="#1B7A2E">Public subnet</text>
+    <text x="620" y="459" font-size="11" fill="#555" text-anchor="end">NAT Gateway</text>
+  </g>
+  <!-- Web subnet AZ1 -->
+  <g>
+    <rect x="230" y="490" width="400" height="100" fill="#FFF4E5" stroke="#FF9900" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="240" y="514" font-size="12" font-weight="bold" fill="#B25E00">Web Subnet</text>
+    <rect x="280" y="528" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="310" y="554" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <rect x="360" y="528" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="390" y="554" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <text x="500" y="554" font-size="11" fill="#232F3E" text-anchor="middle">EC2 Instances — Web servers</text>
+  </g>
+  <!-- App subnet AZ1 -->
+  <g>
+    <rect x="230" y="604" width="400" height="100" fill="#FFF4E5" stroke="#FF9900" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="240" y="628" font-size="12" font-weight="bold" fill="#B25E00">App Subnet</text>
+    <rect x="280" y="642" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="310" y="668" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <rect x="360" y="642" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="390" y="668" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <text x="500" y="668" font-size="11" fill="#232F3E" text-anchor="middle">EC2 Instances — App servers</text>
+    <text x="500" y="684" font-size="10" font-style="italic" fill="#8C4FFF" text-anchor="middle">PutEvents: OrderPlaced, PaymentReceived</text>
+  </g>
+
+  <!-- Public subnet AZ2 -->
+  <g>
+    <rect x="710" y="430" width="400" height="46" fill="#E6F4EA" stroke="#1B7A2E" stroke-width="1"/>
+    <text x="720" y="459" font-size="12" font-weight="bold" fill="#1B7A2E">Public subnet</text>
+    <text x="1100" y="459" font-size="11" fill="#555" text-anchor="end">NAT Gateway</text>
+  </g>
+  <!-- Web subnet AZ2 -->
+  <g>
+    <rect x="710" y="490" width="400" height="100" fill="#FFF4E5" stroke="#FF9900" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="720" y="514" font-size="12" font-weight="bold" fill="#B25E00">Web Subnet</text>
+    <rect x="760" y="528" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="790" y="554" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <rect x="840" y="528" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="870" y="554" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <text x="980" y="554" font-size="11" fill="#232F3E" text-anchor="middle">EC2 Instances — Web servers</text>
+  </g>
+  <!-- App subnet AZ2 -->
+  <g>
+    <rect x="710" y="604" width="400" height="100" fill="#FFF4E5" stroke="#FF9900" stroke-width="1" stroke-dasharray="5 4"/>
+    <text x="720" y="628" font-size="12" font-weight="bold" fill="#B25E00">App Subnet</text>
+    <rect x="760" y="642" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="790" y="668" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <rect x="840" y="642" width="60" height="44" rx="3" fill="#FF9900"/>
+    <text x="870" y="668" font-size="10" fill="#fff" text-anchor="middle">EC2</text>
+    <text x="980" y="668" font-size="11" fill="#232F3E" text-anchor="middle">EC2 Instances — App servers</text>
+    <text x="980" y="684" font-size="10" font-style="italic" fill="#8C4FFF" text-anchor="middle">PutEvents: OrderPlaced, PaymentReceived</text>
+  </g>
+
+  <!-- Flow arrows inside VPC -->
+  <g stroke="#232F3E" stroke-width="1.8" fill="none">
+    <line x1="555" y1="230" x2="555" y2="348" marker-end="url(#arrow)"/>
+    <line x1="600" y1="402" x2="420" y2="488" marker-end="url(#arrow)"/>
+    <line x1="600" y1="402" x2="900" y2="488" marker-end="url(#arrow)"/>
+    <line x1="420" y1="590" x2="420" y2="602" marker-end="url(#arrow)"/>
+    <line x1="900" y1="590" x2="900" y2="602" marker-end="url(#arrow)"/>
+  </g>
+  <text x="566" y="300" font-size="11" fill="#232F3E">HTTPS</text>
+
+  <!-- Event sources feeding the bus (purple dashed) -->
+  <g stroke="#8C4FFF" stroke-width="1.6" fill="none" stroke-dasharray="6 4">
+    <path d="M 430 706 C 430 780, 500 800, 560 800" marker-end="url(#arrowPurple)"/>
+    <path d="M 910 706 C 910 780, 800 800, 740 800" marker-end="url(#arrowPurple)"/>
+    <path d="M 750 232 C 750 500, 750 700, 750 760" marker-end="url(#arrowPurple)"/>
+    <path d="M 1000 232 C 1000 500, 900 700, 820 760" marker-end="url(#arrowPurple)"/>
+  </g>
+  <text x="1160" y="470" font-size="11" font-weight="bold" fill="#8C4FFF" text-anchor="end">event sources</text>
+  <text x="1160" y="485" font-size="11" fill="#8C4FFF" text-anchor="end">PutEvents &#8226; Scheduler &#8226; SaaS</text>
+
+  <!-- Event Bus -->
+  <g>
+    <rect x="190" y="760" width="960" height="120" fill="#F3EEFF" stroke="#8C4FFF" stroke-width="2"/>
+    <text x="210" y="786" font-size="15" font-weight="bold" fill="#8C4FFF">Amazon EventBridge — Event Bus (orders-bus)</text>
+    <rect x="220" y="800" width="150" height="56" rx="4" fill="#8C4FFF"/>
+    <text x="295" y="824" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Rules</text>
+    <text x="295" y="842" font-size="11" fill="#ffffff" text-anchor="middle">event patterns</text>
+    <rect x="400" y="800" width="150" height="56" rx="4" fill="#8C4FFF"/>
+    <text x="475" y="824" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Input Transformer</text>
+    <text x="475" y="842" font-size="11" fill="#ffffff" text-anchor="middle">reshape payload</text>
+    <rect x="580" y="800" width="150" height="56" rx="4" fill="#8C4FFF"/>
+    <text x="655" y="824" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Archive</text>
+    <text x="655" y="842" font-size="11" fill="#ffffff" text-anchor="middle">replayable copy</text>
+    <rect x="760" y="800" width="150" height="56" rx="4" fill="#8C4FFF"/>
+    <text x="835" y="824" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Schema Registry</text>
+    <text x="835" y="842" font-size="11" fill="#ffffff" text-anchor="middle">event discovery</text>
+    <text x="980" y="836" font-size="11" font-style="italic" fill="#555" text-anchor="middle">DLQ on every rule &#8594; SQS</text>
+  </g>
+
+  <!-- Targets row -->
+  <text x="190" y="926" font-size="15" font-weight="bold" fill="#232F3E">Targets — one matching event fans out to many consumers:</text>
+  <!-- Lambda -->
+  <g>
+    <rect x="190" y="942" width="200" height="64" rx="4" fill="#FF9900"/>
+    <text x="290" y="968" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">AWS Lambda</text>
+    <text x="290" y="986" font-size="11" fill="#ffffff" text-anchor="middle">process the order</text>
+  </g>
+  <!-- SQS -->
+  <g>
+    <rect x="470" y="942" width="200" height="64" rx="4" fill="#D13239"/>
+    <text x="570" y="968" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Amazon SQS</text>
+    <text x="570" y="986" font-size="11" fill="#ffffff" text-anchor="middle">buffered workers</text>
+  </g>
+  <!-- Step Functions -->
+  <g>
+    <rect x="750" y="942" width="200" height="64" rx="4" fill="#D13239"/>
+    <text x="850" y="968" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Step Functions</text>
+    <text x="850" y="986" font-size="11" fill="#ffffff" text-anchor="middle">orchestrated workflow</text>
+  </g>
+  <!-- SNS -->
+  <g>
+    <rect x="980" y="942" width="170" height="64" rx="4" fill="#527FFF"/>
+    <text x="1065" y="968" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Amazon SNS</text>
+    <text x="1065" y="986" font-size="11" fill="#ffffff" text-anchor="middle">alerts &amp; fan-out</text>
+  </g>
+  <!-- Bus -> targets arrows -->
+  <g stroke="#8C4FFF" stroke-width="1.8" fill="none">
+    <line x1="290" y1="880" x2="290" y2="940" marker-end="url(#arrowPurple)"/>
+    <line x1="570" y1="880" x2="570" y2="940" marker-end="url(#arrowPurple)"/>
+    <line x1="850" y1="880" x2="850" y2="940" marker-end="url(#arrowPurple)"/>
+    <line x1="1065" y1="880" x2="1065" y2="940" marker-end="url(#arrowPurple)"/>
+  </g>
+  <text x="600" y="1036" font-size="11" fill="#555" text-anchor="middle">&#9888; Diagram simplified — the bus also receives AWS service events (EC2 state changes, S3, CloudTrail) on the default bus.</text>
+</svg>
