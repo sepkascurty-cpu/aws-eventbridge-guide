@@ -9,6 +9,10 @@
 
 ---
 
+## 🌍 In plain words — what is this, really?
+
+Imagine a big warehouse sorting hub where packages keep arriving with labels like "new order placed" or "payment failed", and workers do not hand each package to the next team themselves — they just drop it on a central conveyor belt. That conveyor belt is EventBridge: your apps drop small messages called events onto it whenever something happens, and EventBridge reads the label on each event and sends it only to the teams that said they care about that kind of news. One team might pack boxes, another might send the customer an email, and a third might update the stock count, all reacting to the same event without ever talking to each other directly. It can also act like the warehouse's wall clock, triggering jobs at set times, and it keeps copies of old events so you can replay them if something went wrong. In technical terms, producers publish events to an event bus, rules match them by pattern, and targets such as Lambda, SQS, or Step Functions do the work.
+
 ## Why EventBridge Matters
 
 | Problem | Without EventBridge | With EventBridge |
@@ -144,10 +148,6 @@ python eventbridge_demo.py --demo
 # Live (needs AWS credentials + boto3)
 python eventbridge_demo.py --live --bus orders-bus --region ap-southeast-1
 ```
-
-## Quiz
-
-Test yourself in [quiz.md](quiz.md) — 5 questions on buses, rules, Scheduler, Pipes and replay.
 
 ---
 
